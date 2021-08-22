@@ -1,0 +1,22 @@
+language: generic   
+sudo: required
+services:
+  - docker
+
+before_install:
+  - docker build -t amol9372/react-test -f ./client/Dockerfile.dev ./client
+
+script:
+  - docker run amol9372/react-test npm test -- --coverage
+
+ after_success:
+  - docker build -t amol9372/multi-client ./client
+  - docker build -t amol9372/multi-server ./server
+  - docker build -t amol9372/multi-nginx ./nginx
+  - docker build -t amol9372/multi-worker ./worker 
+  # Login to docker hub
+  - echo "$DOCKER_PASSWORD" | docker login -u "$DOCKER_USERNAME" --password-stdin
+  - docker push amol9372/multi-client
+  - docker push amol9372/multi-server
+  - docker push amol9372/multi-nginx
+  - docker push amol9372/multi-worker
