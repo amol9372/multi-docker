@@ -1,0 +1,19 @@
+{
+    "name": "name",
+    "description": "description",
+    "authors": "author",
+    "version": "1.0.0",
+    "main": "pathToMain",
+    "dependencies": {
+        "express": "4.17.1",
+        "pg": "8.7.1",
+        "redis": "3.1.2",
+        "cors": "2.8.5",
+        "nodemon": "2.0.12",
+        "body-parser": "*"
+    },
+    "scripts": {
+        "start": "node index.js",
+        "dev": "nodemon"
+    }
+}
